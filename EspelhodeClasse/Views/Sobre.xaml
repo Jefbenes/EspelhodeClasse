@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:EspelhodeClasse.ViewModels"
+             x:Class="EspelhodeClasse.Views.Sobre"
+             Title="Sobre">
+    <ContentPage.BindingContext>
+        <viewModels:SobreViewModel />
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout  BackgroundColor ="{OnPlatform WinUI=LightYellow, iOS=Silver, Android=LightGreen}" Spacing="10" Margin="5">
+        <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+            <Image x:Name="Bot"
+                   Source="dotnet_bot.png"
+                   SemanticProperties.Description="Robo acenando!"
+                   HeightRequest="150"/>
+            <Label FontSize="36" FontAttributes="Bold" Text="{Binding Title}" VerticalOptions="End" />
+            <Label FontSize="24" Text="{Binding Version}" VerticalOptions="End" />
+        </HorizontalStackLayout>
+        <Label Text="{Binding Message}" HorizontalOptions="Center"/>
+        <Button Text="Saiba mais" Command="{Binding ShowMoreInfoCommand}" />
+    </VerticalStackLayout>
+</ContentPage>
+    

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:EspelhodeClasse.ViewModels"
+             x:Class="EspelhodeClasse.Views.Aluno"             
+             Title="Aluno">
+
+    <ContentPage.BindingContext>
+        <viewModels:AlunoViewModel />
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout BackgroundColor ="{OnPlatform WinUI=LightYellow, iOS=Silver, Android=LightGreen}" Spacing="10" Margin="5">
+        <VerticalStackLayout.Padding>
+            <OnPlatform x:TypeArguments="Thickness">
+                <On Platform="iOS" Value="30,60,30,30" />
+                <On Platform="Android" Value="30" />
+                <On Platform="WinUI" Value="30" />
+            </OnPlatform>
+        </VerticalStackLayout.Padding>
+        <Editor x:Name="TextEditor" TextColor="DarkBlue"
+                FontSize="24"
+                Placeholder="Digite sua anotação"
+                Text="{Binding Text}"
+                HeightRequest="{OnPlatform WinUI=200, Android=400, iOS=400}"/>
+
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
+            <Button Grid.Column="0"
+                    TextColor="AntiqueWhite"
+                    BackgroundColor="Blue"
+                    Text="Save"
+                    WidthRequest="250"
+                    Command="{Binding SaveCommand}"/>
+
+            <Button Grid.Column="1"
+                    TextColor="AntiqueWhite"
+                    BackgroundColor="Blue"
+                    Text="Delete"
+                    WidthRequest="250"
+                    Command="{Binding DeleteCommand}"/>
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>

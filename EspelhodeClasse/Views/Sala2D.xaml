@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:EspelhodeClasse.ViewModels"
+             x:Class="EspelhodeClasse.Views.Sala2D"
+             Title="Sala2D">
+    
+    <ContentPage.BindingContext>
+        <viewModels:Sala2DViewModel />
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout>
+        <Label 
+            Text="Sala de aula"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            TextColor="Blue"
+            FontSize="48" />
+        <Button Text="Configurar"
+                TextColor="AntiqueWhite"
+                BackgroundColor="Blue"
+                FontSize="18"
+                WidthRequest="250"
+                Command="{Binding ConfigCommand}"/>
+
+
+    </VerticalStackLayout>
+</ContentPage>
