@@ -9,20 +9,4 @@
         <viewModels:Sala2DViewModel />
     </ContentPage.BindingContext>
 
-    <VerticalStackLayout>
-        <Label 
-            Text="Sala de aula"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center"
-            TextColor="Blue"
-            FontSize="48" />
-        <Button Text="Configurar"
-                TextColor="AntiqueWhite"
-                BackgroundColor="Blue"
-                FontSize="18"
-                WidthRequest="250"
-                Command="{Binding ConfigCommand}"/>
-
-
-    </VerticalStackLayout>
 </ContentPage>

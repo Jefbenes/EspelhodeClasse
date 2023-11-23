@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace EspelhodeClasse.ViewModels;
 
-class Sala2DViewModel// : IQueryAttributable
+class Sala2DViewModel
 {
     public ICommand ConfigCommand { get; }
 

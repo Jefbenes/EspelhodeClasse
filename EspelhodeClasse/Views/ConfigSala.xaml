@@ -4,57 +4,9 @@
              xmlns:viewModels="clr-namespace:EspelhodeClasse.ViewModels"
              x:Class="EspelhodeClasse.Views.ConfigSala"
              Title="ConfigSala">
-
+    
     <ContentPage.BindingContext>
-        <viewModels:ConfigSalaViewModel />
+        <viewModels:ConfigSalaViewModel/>
     </ContentPage.BindingContext>
 
-    <VerticalStackLayout>
-        <Grid ColumnDefinitions="*,*"
-              RowDefinitions="*,*,*"
-              ColumnSpacing="10">
-            
-            <Button Text="Mais Colunas"
-                    TextColor="AntiqueWhite"
-                    BackgroundColor="Blue"
-                    FontSize="18"
-                    Grid.Column="0"
-                    Grid.Row="0"
-                    Command="{Binding MaisColunas}"/>
-            <Label Text="Número de Colunas"
-                   FontSize="24"
-                   VerticalOptions="Center" 
-                   HorizontalOptions="Center"
-                   Grid.Column="0"
-                   Grid.Row="1"/>
-            <Button Text="Menos Colunas"
-                    TextColor="AntiqueWhite"
-                    BackgroundColor="Blue"
-                    FontSize="18"
-                    Grid.Column="0"
-                    Grid.Row="2"
-                    Command="{Binding MenosColunas}"/>
-
-            <Button Text="Mais Linhas"
-                    TextColor="AntiqueWhite"
-                    BackgroundColor="Blue"
-                    FontSize="18"
-                    Grid.Column="1"
-                    Grid.Row="0"
-                    Command="{Binding MaisColunas}"/>
-            <Label Text="Número de Linhas"
-                   FontSize="24"
-                   VerticalOptions="Center" 
-                   HorizontalOptions="Center"
-                   Grid.Column="1"
-                   Grid.Row="1"/>
-            <Button Text="Menos Linhas"
-                    TextColor="AntiqueWhite"
-                    BackgroundColor="Blue"
-                    FontSize="18"
-                    Grid.Column="1"
-                    Grid.Row="2"
-                    Command="{Binding MenosColunas}"/>
-        </Grid>
-    </VerticalStackLayout>
 </ContentPage>

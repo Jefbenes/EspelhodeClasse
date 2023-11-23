@@ -161,6 +161,6 @@ internal class Aluno
         return Directory                                                // Use Linq extensions to load the *.notes.txt files.
             .EnumerateFiles(appDataPath, "*.alunos.txt")                // Select the file names from the directory                                                       
             .Select(filename => Aluno.Load(Path.GetFileName(filename))) // Each file name is used to load a note                                                                      
-            .OrderByDescending(aluno => aluno.Date);                      // With the final collection of notes, order them by date
+            .OrderByDescending(aluno => aluno.Date);                    // With the final collection of notes, order them by date
     }
 }

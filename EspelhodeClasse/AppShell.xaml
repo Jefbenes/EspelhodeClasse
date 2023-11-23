@@ -15,7 +15,7 @@
             Title="Sala 2D"
             ContentTemplate="{DataTemplate views:Sala2D}" />
 
-        <ShellContent
+    <ShellContent
             Title="Sala 3D"
             ContentTemplate="{DataTemplate views:Sala3D}" />
 

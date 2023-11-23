@@ -9,7 +9,7 @@ public partial class Sala3D : ContentPage
         MontaSala(6, 8);            // maxColunas e maxLinhas
     }
 
-    void MontaSala(int maxColunas, int maxLinhas)
+    private void MontaSala(int maxColunas, int maxLinhas)
     {
         // O layout esta rotacionado à esquerda, logo, o total de linhas será o total de colunas e vice versa
         // O grid  | a, b, c |    vira  | 0, c, f |   mas acrescento uma coluna para poder posicionar as imagens melhor
