@@ -18,34 +18,32 @@ internal class ConfigSalaViewModel : ObservableObject, INotifyPropertyChanged
     private Models.Sala _sala;
     private Grid _gridMenu, _gridSeletor, _gridSala;
 
-    private int _colunas;
-    private int _linhas;
-    private int _maxColunas = 10;
-
     public ICommand MaisColunasCommand { get; }
     public ICommand MenosColunasCommand { get; }
     public ICommand MaisLinhasCommand { get; }
     public ICommand MenosLinhasCommand { get; }
 
-     public int Colunas
+    public int Colunas
     {
-        get { return _colunas; }
+        get { return _sala.Colunas; }
         set
         {
-            if (_colunas != value)
+            if (_sala.Colunas != value)
             {
-                _colunas = value;
+                _sala.Colunas = value;
+                OnPropertyChanged(nameof(Colunas));
             }
         }
     }
     public int Linhas
     {
-        get { return _linhas; }
+        get { return _sala.Linhas; }
         set
         {
-            if (_linhas != value)
+            if (_sala.Linhas != value)
             {
-                _linhas = value;
+                _sala.Linhas = value;
+                OnPropertyChanged(nameof(Linhas));
             }
         }
     }
@@ -84,51 +82,52 @@ internal class ConfigSalaViewModel : ObservableObject, INotifyPropertyChanged
     }
     private void MaisColunas()
     {
-        if (Colunas < 10)
-        {
-            Colunas++;
-            OnPropertyChanged(nameof(Colunas));
-        }
+        _sala.MaisColunas();
+        OnPropertyChanged(nameof(Colunas));
     }
     private void MenosColunas()
     {
-        if (Colunas > 1)
-        {
-            Colunas--;
-            OnPropertyChanged(nameof(Colunas));
-        }
+        _sala.MenosColunas();
+        OnPropertyChanged(nameof(Colunas));
     }
     private void MaisLinhas()
     {
-        if (Linhas < 10)
-        {
-            Linhas++;
-            OnPropertyChanged(nameof(Linhas));
-        }
+        _sala.MaisLinhas();
+        OnPropertyChanged(nameof(Linhas));
     }
     private void MenosLinhas()
     {
-        if (Linhas > 1)
-        {
-            Linhas--;
-            OnPropertyChanged(nameof(Linhas));
-        }
+        _sala.MenosLinhas();
+        OnPropertyChanged(nameof(Linhas));
     }
     public ObservableCollection<bool> CheckBoxStates { get; set; } = new ObservableCollection<bool>();
     private void InicializarCheckBoxes()
     {
         CheckBoxStates.Clear();
 
-        for (int i = 0; i < _maxColunas; i++)
+        for (int i = 0; i < _sala.MaxColunas; i++)
         {
+
+
+            int index = i; // Crie uma variável local para armazenar o valor atual de i
+
+            var chBox = new CheckBox
+            {
+                IsChecked = _sala.GetMesaCorredor(index)
+            };
+            // Associe o manipulador de eventos ao evento CheckedChanged
+            chBox.CheckedChanged += (s, e) =>
+            {
+                // Verifique se o CheckBox foi marcado ou desmarcado
+                var checkBox = (CheckBox)s;
+                _sala.SetMesaCorredor(index, checkBox.IsChecked);
+            };
             CheckBoxStates.Add(true);
         }
     }
     public ConfigSalaViewModel()
     {
         _sala = new Models.Sala();
-        Colunas = 1;
-        Linhas = 1;
         MaisColunasCommand = new Command(MaisColunas);
         MenosColunasCommand = new Command(MenosColunas);
         MaisLinhasCommand = new Command(MaisLinhas);
@@ -288,21 +287,37 @@ internal class ConfigSalaViewModel : ObservableObject, INotifyPropertyChanged
                     .OfType<CheckBox>()
                     .FirstOrDefault(ch => Grid.GetColumn(ch) == i);
 
-                if (checkBox != null && checkBox.IsChecked)
+                if (checkBox != null)
                 {
-                    var mesa = new Frame
+                    if (checkBox.IsChecked)
                     {
-                        BackgroundColor = Colors.DarkBlue,
-                        BorderColor = Colors.LightGray,
-                        HasShadow = true,
-                        CornerRadius = 12,
-                        WidthRequest = 90,
-                        HeightRequest = 60,
-                    };
+                        var mesa = new Frame
+                        {
+                            BackgroundColor = Colors.LightGray,
+                            BorderColor = Colors.Gray,
+                            HasShadow = true,
+                            CornerRadius = 12,
+                            WidthRequest = 90,
+                            HeightRequest = 55,
+                        };
 
-                    Grid.SetColumn(mesa, i);
-                    Grid.SetRow(mesa, j);
-                    grid.Children.Add(mesa);
+                        Grid.SetColumn(mesa, i);
+                        Grid.SetRow(mesa, j);
+                        grid.Children.Add(mesa);
+                    }
+                    else
+                    {
+                        var corredor = new Frame
+                        {
+                            BackgroundColor = Colors.LightYellow,
+                            WidthRequest = 90,
+                            HeightRequest = 55,
+                        };
+
+                        Grid.SetColumn(corredor, i);
+                        Grid.SetRow(corredor, j);
+                        grid.Children.Add(corredor);
+                    }
                 }
             }
         }

@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:EspelhodeClasse.ViewModels"
              x:Class="EspelhodeClasse.Views.Sala2D"
-             Title="Sala2D">
+             Title="Sala2D"
+             NavigatedTo="ContentPage_NavigatedTo">
     
     <ContentPage.BindingContext>
         <viewModels:Sala2DViewModel />

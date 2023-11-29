@@ -1,17 +1,21 @@
+using EspelhodeClasse.ViewModels;
 using Microsoft.Maui.Graphics.Text;
 
 namespace EspelhodeClasse.Views;
-
 public partial class Sala2D : ContentPage
 {
-	public Sala2D()
+    private ConfigSalaViewModel viewMd;
+    public Sala2D()
 	{
 		InitializeComponent();
         MontaSala();
     }
     private void MontaSala()
     {
+        viewMd = new ConfigSalaViewModel();
+//        BindingContext = viewMd;
         Content = new StackLayout();
+        (Content as StackLayout).Children.Clear();
 
         var label = new Label
         {
@@ -32,5 +36,13 @@ public partial class Sala2D : ContentPage
         };        
         btnConfig.SetBinding(Button.CommandProperty, new Binding("ConfigCommand"));
         (Content as StackLayout).Children.Add(btnConfig);
+
+        Grid gridSala = viewMd.GridSala;
+        (Content as StackLayout).Children.Add(gridSala);
+    }
+
+    private void ContentPage_NavigatedTo(object sender, NavigatedToEventArgs e)
+    {
+        MontaSala();
     }
 }

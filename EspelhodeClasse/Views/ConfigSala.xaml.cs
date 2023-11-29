@@ -11,27 +11,15 @@ public partial class ConfigSala : ContentPage
     public ConfigSala()
 	{
 		InitializeComponent();
-        viewModel = new ConfigSalaViewModel();
-        BindingContext = viewModel;
         MontaSala();
     }
     private void MontaSala()
     {
+        viewModel = new ConfigSalaViewModel();
+        BindingContext = viewModel;
         Content = new StackLayout();
 
         (Content as StackLayout).Children.Clear();
-        /*
-                Button btnTeste = new Button
-                {
-                    Text = "Refresh",
-                    TextColor = Color.FromArgb("ffFFFFaF"),
-                    HorizontalOptions = LayoutOptions.Center,
-                    FontSize = 14
-                };
-                btnTeste.Command = new Command(() => MontaSala());
-                (Content as StackLayout).Children.Add(btnTeste);
-
-         */
 
         Grid gridMenu = viewModel.GridMenu;
         (Content as StackLayout).Children.Add(gridMenu);
@@ -41,6 +29,10 @@ public partial class ConfigSala : ContentPage
 
         Grid gridSala = viewModel.GridSala;
         (Content as StackLayout).Children.Add(gridSala);
+    }
+    private void ContentPage_NavigatedTo(object sender, NavigatedToEventArgs e)
+    {
+        MontaSala();
     }
 }
 
