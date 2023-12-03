@@ -11,6 +11,7 @@ using System.ComponentModel;
 using static System.Net.Mime.MediaTypeNames;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Collections.ObjectModel;
+using System.Reflection;
 
 namespace EspelhodeClasse.ViewModels;
 internal class ConfigSalaViewModel : ObservableObject, INotifyPropertyChanged
@@ -107,8 +108,6 @@ internal class ConfigSalaViewModel : ObservableObject, INotifyPropertyChanged
 
         for (int i = 0; i < _sala.MaxColunas; i++)
         {
-
-
             int index = i; // Crie uma variável local para armazenar o valor atual de i
 
             var chBox = new CheckBox
@@ -244,19 +243,23 @@ internal class ConfigSalaViewModel : ObservableObject, INotifyPropertyChanged
 
         for (int i = 0; i < Colunas; i++)
         {
-            var chBoxMesaCorredor = new CheckBox
+            int index = i; // Crie uma variável local para armazenar o valor atual de i
+
+            var chBox = new CheckBox
             {
-                IsChecked = CheckBoxStates[i]
+                IsChecked = _sala.GetMesaCorredor(index)
             };
-            chBoxMesaCorredor.CheckedChanged += (s, e) =>
+            // Associe o manipulador de eventos ao evento CheckedChanged
+            chBox.CheckedChanged += (s, e) =>
             {
-                CheckBoxStates[i] = chBoxMesaCorredor.IsChecked;
-                // Chame aqui o método que atualiza a tela conforme as mudanças nos CheckBoxes
-//                Sala();
+                // Verifique se o CheckBox foi marcado ou desmarcado
+                var checkBox = (CheckBox)s;
+                _sala.SetMesaCorredor(index, checkBox.IsChecked);
             };
-            Grid.SetColumn(chBoxMesaCorredor, i);
+
+            Grid.SetColumn(chBox, index);
             GridSeletor.ColumnDefinitions.Add(new ColumnDefinition { Width = 90 });
-            GridSeletor.Children.Add(chBoxMesaCorredor);
+            GridSeletor.Children.Add(chBox);
         }
     }
     private void Sala()
